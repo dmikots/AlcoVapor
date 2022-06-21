@@ -15,7 +15,15 @@ public func configure(_ app: Application) throws {
         database: Environment.get("DATABASE_NAME") ?? "vapor_database"
     ), as: .psql)
 
-    app.migrations.add(CreateSongs())
+    app.migrations.add(
+        [
+            CreateEnums(),
+            CreateGlass(),
+            CreateIngredient(),
+            CreateCocktail()
+        
+        ]
+    )
     try app.autoMigrate().wait()
 
     // register routes
